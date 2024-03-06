@@ -1,0 +1,139 @@
+{% extends 'base.html' %} {% load static %} {% load humanize %}
+{% block head_title %}Brrailway{% endblock %} {% block content %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %}
+<div class="bg-white px-3 py-4 rounded-xl my-6 text-black">
+  <h4 class="font-bold text-3xl text-left pb-5">Account NO: {{request.user.account.account_no}}</h4>
+  <h1 class="font-bold text-3xl text-center pb-5">Update Profile Information</h1>
+  <div class="w-full mt-10">
+      <form method="post" class="bg-white  px-8 pt-6 pb-8 mb-4">
+          {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
+          <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.first_name.id_for_label }}">
+                      {{ form.first_name.label }}
+                  </label> {{ form.first_name }} {% if form.first_name.errors %} {% for error in form.first_name.errors %}
+                  <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                  {% endfor %} {% endif %}
+              </div>
+              <div class="w-full md:w-1/2 px-3">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.last_name.id_for_label }}">
+                      {{ form.last_name.label }}
+                  </label> {{ form.last_name }} {% if form.last_name.errors %} {% for error in form.last_name.errors %}
+                  <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                  {% endfor %} {% endif %}
+              </div>
+          </div>
+          <div class="flex flex-wrap -mx-3 mb-6">
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.email.id_for_label }}">
+                      {{ form.email.label }}
+                  </label> {{ form.email }} {% if form.email.errors %} {% for error in form.email.errors %}
+                  <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                  {% endfor %} {% endif %}
+              </div>
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.birth_date.id_for_label }}">
+                    {{ form.birth_date.label }}
+                </label> {{ form.birth_date }} {% if form.birth_date.errors %} {% for error in form.birth_date.errors %}
+                <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                {% endfor %} {% endif %}
+            </div>
+          </div>
+          <div class="flex flex-wrap -mx-3">
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.password1.id_for_label }}">
+                      {{ form.password1.label }}
+                  </label> {{ form.password1 }} {% if form.password1.errors %} {% for error in form.password1.errors %}
+                  <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                  {% endfor %} {% endif %}
+              </div>
+              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                  <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.password2.id_for_label }}">
+                      {{ form.password2.label }}
+                  </label> {{ form.password2 }} {% if form.password2.errors %} {% for error in form.password2.errors %}
+                  <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                  {% endfor %} {% endif %}
+              </div>
+          </div>
+          <div class="flex items-center justify-between">
+              <button class="px-8 py-3 font-semibold rounded hover:bg-white text-white bg-[#c19b76] hover:text-[#c19b76] border-[#c19b76] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;" type="submit">
+                  Update
+              </button>
+          </div>
+      </form>
+  </div>
+</div>
+{% if user_purchases|length > 0 %}
+<div class="container mx-auto items-center my-5 md:my-10 text-black bg-white rounded-2xl">
+  <h5 class="font-bold text-xl text-center pb-5">All Booked</h5>
+  <div class="flex flex-wrap">
+      <div class="relative w-full ">
+          <div class="flex flex-wrap">
+              {% for purchase in user_purchases %}
+              <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 mb-4 px-2">
+                  <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                      <img class="w-full" src="{{ purchase.room.image.url }}" alt="{{ purchase.room.image.url }}">
+                      <div class="px-6 py-4">
+                        <div class="font-bold text-xl mb-2">{{ purchase.room.title}}</div>
+                        
+                        <p class="text-gray-700 text-base">Price: {{ purchase.room.price }} Tk</p>
+                        <p>Pruchase Date: {{ purchase.purchase_date|date:"F d, Y h:i A" }}</p>
+                      </div>
+                      <div class="px-6 pt-4 pb-2">
+                          <a href="{% url 'details_room' purchase.room.id %}" class="flex items-center justify-center w-full p-3 font-semibold tracki bg-white hover:text-white hover:bg-[#5AE4A8] text-[#5AE4A8] border-[#c19b76] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;">More Information</a>
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+  
+          </div>
+      </div>
+  </div>
+</div>
+{% endif %}
+{% if user_review|length > 0 %}
+<div class="flex flex-wrap -mx-2 bg-white text-black rounded-md mb-20">
+  <div class="container p-2 mx-auto sm:p-4 text-black">
+    <h5 class="font-bold text-xl text-center ">All Comment</h5>
+    <div class="overflow-x-auto">
+      <table class="table-auto mx-auto w-full px-5 rounded-xl mt-8 border dark:border-neutral-500">
+        <thead class="bg-purple-900 text-white text-left">
+          <tr class="bg-gradient-to-tr from-[#c19b76] to-[#c19b76] rounded-md py-2 px-4 text-white font-bold">
+            <th class="px-4 py-2">Train Title</th>
+            <th class="px-4 py-2">Comment</th>
+            <th class="px-4 py-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for review in user_review %}
+            <tr class="border-b dark:border-neutral-500">
+              <td class="px-4 py-3 text-s border">
+                <span class="px-2 py-1 font-bold leading-tight rounded-sm">
+                  {{ review.room.title }}
+                </span>
+              </td>
+              <td class="px-4 py-2">
+                {{ review.body }}
+              </td>
+              <td class="px-4 py-2">
+                <a href="{% url 'update_review' review.id %}" class="bg-white  text-[#5AE4A8] font-bold py-2 px-4 ">Edit</a>
+                <a href="{% url 'delete_review' review.id %}" class="bg-white  text-[#5AE4A8] font-bold py-2 px-4 ">delete</a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

@@ -6,7 +6,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import ListView
 from django.contrib import messages
-from train.models import RoomPurchase, UserReviews
+from train.models import TrainPurchase, UserReviews
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -30,7 +30,7 @@ class UserRegistrationView(FormView):
         
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-        confirm_link = f'https://neeshorgo.onrender.com/accounts/active/{uid}/{token}'
+        confirm_link = f'https://brrailway.onrender.com/accounts/active/{uid}/{token}'
         email_subject = "Confirm Your Email"
         email_body = render_to_string('accounts/confirm_email.html', {'confirm_link': confirm_link})
         send_email = EmailMultiAlternatives(email_subject, '', to=[user.email])
@@ -78,7 +78,7 @@ class ProfileView(LoginRequiredMixin, ListView):
     balance = 0
 
     def get(self, request):
-        user_purchases = RoomPurchase.objects.filter(user=request.user)
+        user_purchases = TrainPurchase.objects.filter(user=request.user)
         user_review = UserReviews.objects.filter(user=request.user)
         account_balance = request.user.account.balance
 

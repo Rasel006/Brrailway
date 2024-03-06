@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block head_title %} {% endblock %}
+{% block content %}
+{% load static %}
+<div class="swiffy-slider slider-nav-visible slider-nav-animation slider-nav-animation-slow slider-item-first-visible" id="animatedText">
+    <ul class="slider-container" id="container1">
+        <li id="slide1" class="slide-visible">
+            <div>
+                <img src ="{% static './img/background5.jpeg' %}" alt="..." loading="lazy" class="w-100">
+                <h1 class="display-1 text-4xl text-green custom-animated-text position-absolute top-50 start-50 translate-middle">Brrailway Ticket Booking System</h1>
+            </div>
+        </li>
+        <li id="slide2">
+            <div>
+                <img src ="{% static './img/background7.jpeg' %}" loading="lazy" class="w-100">
+                <h1 class="display-1 text-white custom-animated-text position-absolute top-50 start-50 translate-middle">Brrailway Ticket Booking System</h1>
+            </div>
+        </li>
+    </ul>
+    <button type="button" class="slider-nav" aria-label="Go to previous"></button>
+    <button type="button" class="slider-nav slider-nav-next" aria-label="Go to next"></button>
+    <div class="slider-indicators">
+        <button aria-label="Go to slide" class="active"></button>
+        <button aria-label="Go to slide"></button>
+    </div>
+    <style>
+        #animatedText.slider-nav-animation .slider-container div {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 65, 107, 0.43), rgba(0, 65, 107, 0.43));
+        }
+    
+        #animatedText.slider-nav-animation .slider-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    
+        #animatedText.slider-nav-animation .slider-container .custom-animated-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 1;
+            transition: opacity 1.5s ease-in-out, transform .95s ease-in-out;
+            transition-delay: .5s;
+            text-align: center;
+            color: white;
+        }
+    
+        #animatedText.slider-nav-animation .slider-container .slide-visible .custom-animated-text {
+            opacity: 1;
+            transform: none;
+        }
+    </style>    
+</div>
+
+<section class="bg-white text-black">
+	<div class="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
+		<div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+            <p class="mt-6 mb-8 text-lg sm:mb-12">Brrailway Ticket Booking
+            </p>
+            <h1 class="text-5xl font-bold leadi sm:text-4xl">Tranquil Train Ticket Portal</h1>
+            <p>
+                Discover the essence of seamless travel planning with our Railway Ticket Booking platform. Unparalleled convenience, personalized service, and a commitment to excellence await you. Your journey begins here.
+            </p>
+			<div class="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+				<a href="{% url 'trains'%}" class="px-8 py-3 font-semibold rounded hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#c19b76] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;">Click Here For More Details</a>
+			</div>
+		</div>
+		<div class="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+			<img src ="{% static './img/carosul11.jpg' %}" alt="" class="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
+		</div>
+	</div>
+</section>
+<section class="bg-[#1c1c1c] text-white">
+	<div class="container flex flex-col justify-center mx-auto lg:flex-row lg:justify-between">
+		<div class="flex items-center justify-center w-2/4">
+			<img src ="{% static './img/background3.jpeg' %}" alt="" class="object-contain">
+		</div>
+        <div class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left">
+            <p class="mt-6 mb-8 text-lg sm:mb-12">UNEXPECTED
+            </p>
+            <h1 class="text-5xl font-bold leadi sm:text-4xl">WE TAKE CARE OF YOU</h1>
+            <h1 class="text-5xl font-bold leadi sm:text-4xl">LIKE YOU ARE OUR OWN. </h1>
+            <p>Welcome aboard our platform, where convenience meets efficiency. Book your train tickets effortlessly and embark on your journey hassle-free.</p>
+			<div class="flex flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-start">
+				<a href="{% url 'trains'%}" class="px-8 py-3 font-semibold rounded hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#c19b76] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;">Click Here For All Train Information</a>
+			</div>
+		</div>
+		
+	</div>
+</section>
+{% endblock %}

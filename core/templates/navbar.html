@@ -1,0 +1,89 @@
+{% load static %}
+<div class="navbar bg-white">
+    <div class="container mx-auto flex-1">
+        <a href="/"><img class="h-8 w-full" src="{% static './img/logo6.png' %}" alt=""></a>
+        <div class="text-md lg:flex-grow px-10 hidden lg:block">
+            <a href="/" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
+                Home
+            </a>
+            <a href="{% url 'trains' %}" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
+                Train Information
+            </a>
+            <a href="{% url 'about' %}" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
+                About Us
+            </a>
+            {% if request.user.is_authenticated %}
+                {% if user.is_superuser %}
+                <a href="{% url 'deposit' %}" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
+                    Add Train
+                </a>
+                {% endif %}
+                <a href="{% url 'deposit' %}" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
+                 Deposit
+            </a>
+            {% endif %}
+        </div>
+       
+       
+    </div>
+    <div class="flex-none gap-2">
+      {% if request.user.is_authenticated %}
+            <div class="flex w-auto ">
+                <div class="text-blue-900 my-auto font-black px-5 hidden lg:block md:block">Welcome, {{ request.user.first_name }} (balance: {{ request.user.account.balance }})</div>
+                <a href="{% url 'profile' %}" class="hidden lg:block hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 mx-2 px-5 mt-2 rounded" style="border: 1px solid #5AE4A8;">Profile</a>
+                <a href="{% url 'logout' %}" class="hidden lg:block hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Logout</a>
+            </div>
+        {% else %}
+            <div class="hidden lg:block">
+                <a href="{% url 'login' %}" class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Login</a>
+            </div>
+            <div class="hidden lg:block" >
+                <a href="{% url 'register' %}" class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 p px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Register</a>
+            </div>
+        {% endif %}
+      <div class="dropdown dropdown-end block lg:hidden">
+        <div class="flex-none">
+            <button class="btn btn-square btn-ghost">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+        <ul tabindex="0" class="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-white rounded-box w-52">
+          <li>
+            <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">
+                Home
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'trains' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">
+              Train Information
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'about' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">
+                About
+            </a>
+          </li>
+          {% if request.user.is_authenticated %}
+          <li>
+            <a href="{% url 'deposit' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">
+                Deposit
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'profile' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">Profile</a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">Logout</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'login' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">Login</a>
+          </li>
+          <li>
+            <a href="{% url 'register' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+</div>

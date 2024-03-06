@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% load static %} {% block head_title %}Brrailway{% endblock %} {% block content %} 
+
+{% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
+    <p class="font-bold">Error!</p>
+    <p class="block sm:inline">{{ error }}</p>
+</div>
+{% endfor %} {% endif %}
+<section class="bg-gray-100 text-black">
+    <div class="flex justify-center min-h-screen">
+        <div class="hidden bg-cover lg:block lg:w-2/5" style="background-image: url('https://yearlynews.com/wp-content/uploads/2021/07/Dhaka-to-Tangail-Train-780x470.png')">
+        </div>
+
+        <div class="flex items-center w-full max-w-3xl p-8 mx-auto lg:px-12 lg:w-3/5">
+            <div class="w-full">
+                <h1 class="text-2xl font-semibold tracking-wider  capitalize">
+                    Get your free account now.
+                </h1>
+
+                <p class="mt-4">
+                    Let’s get you all set up so you can verify your personal account and begin setting up your profile.
+                </p>
+
+                <form method="post" class=" px-8 pt-6 pb-8 mb-4">
+                    {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
+                    
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-2/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.first_name.id_for_label }}">
+                                {{ form.username.label }}
+                            </label> {{ form.username }} {% if form.username.errors %} {% for error in form.username.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.first_name.id_for_label }}">
+                                {{ form.first_name.label }}
+                            </label> {{ form.first_name }} {% if form.first_name.errors %} {% for error in form.first_name.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.last_name.id_for_label }}">
+                                {{ form.last_name.label }}
+                            </label> {{ form.last_name }} {% if form.last_name.errors %} {% for error in form.last_name.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.nid_number.id_for_label }}">
+                                {{ form.nid_number.label }}
+                            </label>{{ form.nid_number }} {% if form.nid_number.errors %} {% for error in form.nid_number.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.contact_number.id_for_label }}">
+                                {{ form.contact_number.label }}
+                            </label>{{ form.contact_number }} {% if form.contact_number.errors %} {% for error in form.contact_number.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.email.id_for_label }}">
+                                {{ form.email.label }}
+                            </label> {{ form.email }} {% if form.email.errors %} {% for error in form.email.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.birth_date.id_for_label }}">
+                                {{ form.birth_date.label }}
+                            </label> {{ form.birth_date }} {% if form.birth_date.errors %} {% for error in form.birth_date.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.password1.id_for_label }}">
+                                {{ form.password1.label }}
+                            </label> {{ form.password1 }} {% if form.password1.errors %} {% for error in form.password1.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.password2.id_for_label }}">
+                                {{ form.password2.label }}
+                            </label> {{ form.password2 }} {% if form.password2.errors %} {% for error in form.password2.errors %}
+                            <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                            {% endfor %} {% endif %}
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;" type="submit">
+                            Register
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

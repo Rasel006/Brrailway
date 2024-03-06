@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="w-full flex mt-5 justify-center ">
+  <div class="bg-white w-5/12 rounded-lg shadow-xl">
+      <h1 class="font-bold text-3xl text-center pb-5 pt-10 px-5">Update Review</h1>
+      <form method="post" class="px-8 pt-6 pb-8 mb-4">
+          {% csrf_token %}
+          <div class="mb-4">
+              <input type="hidden" name="purchase_id" value="{{ purchase_id }}">
+          </div>
+          {{ form.as_p }}
+          {% if form.amount.errors %} 
+              {% for error in form.amount.errors %}
+                  <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+              {% endfor %}
+          {% endif %}
+          <div class="flex w-full justify-center">
+              <button class="px-8 py-3 mx-10 font-semibold rounded hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 rounded mt-12" style="border: 1px solid #5AE4A8;" type="submit">
+                Update
+              </button>
+              <a href="/" class="px-8 py-3 font-semibold rounded hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 rounded mt-12" style="border: 1px solid #5AE4A8;">
+                  Cancel
+              </a>
+          </div>
+      </form>
+  </div>
+</div>
+{% endblock %}

@@ -3,12 +3,15 @@ from django import forms
 from .models import UserBrrailwayAccount
 from django.contrib.auth.forms import UserCreationForm
 
+
 class UserRegistrationForm(UserCreationForm):
     birth_date = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    nid_number = forms.CharField(max_length=10, label='NID Number')
+    contact_number = forms.CharField(max_length=11, label='Contact Number')
 
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'birth_date', 'email']
+        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'birth_date', 'email','nid_number','contact_number' ]
 
     def save(self, commit=True):
         username = self.cleaned_data['username']

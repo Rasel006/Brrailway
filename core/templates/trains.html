@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block head_title %}Brrailway{% endblock %}
+{% block content %}
+{% load static %}
+<div class="container mx-auto items-center my-5 md:my-10 text-black bg-white rounded-2xl">
+    <div class="flex flex-wrap">
+        <div class="relative w-full ">
+            <div class="flex flex-wrap">
+                {% for train in trains %}
+                <div class="w-full sm:w-1/2 md:w-1/2 lg:w-1/3 xl:w-1/3 mb-4 px-2">
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <img class="w-full" src="https://yearlynews.com/wp-content/uploads/2021/07/Dhaka-to-Tangail-Train-780x470.png" alt="https://yearlynews.com/wp-content/uploads/2021/07/Dhaka-to-Tangail-Train-780x470.png">
+                        <div class="px-6 py-4">
+                          <div class="font-bold text-xl mb-2">{{ train.title}}</div>
+                          <p class="text-gray-700 text-base">Ticket Price: {{ train.price }} $</p>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <a href="{% url 'details_train' train.id %}" class="flex items-center justify-center w-full p-3 font-semibold tracki bg-white hover:text-white hover:bg-[#5AE4A8] text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;">More Information</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+    
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
