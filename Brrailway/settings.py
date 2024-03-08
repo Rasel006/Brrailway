@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import environ
+import dj_database_url
 
 env = environ.Env()
 environ.Env.read_env()
@@ -29,6 +30,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
 
 
 # Application definition
@@ -87,10 +89,10 @@ WSGI_APPLICATION = 'Brrailway.wsgi.application'
 #    }
 #}
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgres://brrailway_user:GeZzGjpeBCkyKHZc520uONlwXa6nMtsp@dpg-cnlfde8l5elc73dqehcg-a.oregon-postgres.render.com/brrailway',
+    )
 }
 
 # Password validation
