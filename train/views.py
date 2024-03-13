@@ -16,6 +16,42 @@ from transactions.views import send_transaction_email
 
 # Create your views here.
 
+# train/views.py
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from .models import Train
+# views.py in the train app
+from django.contrib.auth.decorators import login_required
+
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def add_train(request):
+    if not request.user.is_staff:
+        return HttpResponse("You are not authorized to access this page.")
+
+@login_required
+def add_train(request):
+    if not request.user.is_staff:
+        return redirect('train:search_train')
+    
+    if request.method == 'POST':
+        # Handle form submission to add a new train
+        return redirect('train:search_train')
+    
+    return render(request, 'train/add_train.html')
+
+def search_train(request):
+    trains = Train.objects.all()  # Fetch all trains or implement search logic
+    return render(request, 'train/search_train.html', {'trains': trains})
+
+@login_required
+def book_ticket(request, train_id):
+    train = Train.objects.get(pk=train_id)
+    # Handle ticket booking logic
+    return render(request, 'train/book_ticket.html', {'train': train})
+
 class DetailsTrainView(DetailView):
     model = Train
     template_name = 'details_train.html'

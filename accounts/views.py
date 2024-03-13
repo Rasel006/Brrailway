@@ -30,7 +30,7 @@ class UserRegistrationView(FormView):
         
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
-        confirm_link = f'https://brrailway.onrender.com//accounts/active/{uid}/{token}'
+        confirm_link = f'https://brrailway.onrender.com/accounts/active/{uid}/{token}'
         email_subject = "Confirm Your Email"
         email_body = render_to_string('accounts/confirm_email.html', {'confirm_link': confirm_link})
         send_email = EmailMultiAlternatives(email_subject, '', to=[user.email])
@@ -65,13 +65,15 @@ class UserLoginView(LoginView):
     def get_success_url(self):
         messages.success(self.request, "Login successfully")
         return reverse_lazy('home')
-
+    
 class UserLogoutView(LogoutView):
     def get_success_url(self):
         if self.request.user.is_authenticated:
-            logout(self.request)
-        messages.success(self.request, "Logout successfully")
-        return reverse_lazy('home')
+            # Redirect authenticated users to the home page
+            return reverse_lazy('home')
+        else:
+            # Redirect unauthenticated users to the login page
+            return reverse_lazy('login')
 
 class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'accounts/profile.html'
@@ -98,3 +100,4 @@ class ProfileView(LoginRequiredMixin, ListView):
             return redirect('profile')
         return render(request, self.template_name, {'form': form})
 
+ 

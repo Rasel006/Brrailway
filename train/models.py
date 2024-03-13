@@ -27,7 +27,12 @@ class Train(models.Model):
     
     def __str__(self):
         return self.title
-    
+
+class Trainn(models.Model):
+    train_name = models.CharField(max_length=100)
+    departure_time = models.DateTimeField()
+    arrival_time = models.DateTimeField()
+
 class UserReviews(models.Model):
     train = models.ForeignKey(Train, on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Train</title>
+</head>
+<body>
+    <h1>Search Train</h1>
+    <!-- Display search results here -->
+    <ul>
+        {% for train in trains %}
+            <li>{{ train.train_name }}</li>
+            <!-- Display other train details -->
+        {% endfor %}
+    </ul>
+</body>
+</html>

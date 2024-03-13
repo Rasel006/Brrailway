@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block head_title %}Search Trains - Brrailway{% endblock %}
+{% block content %}
+<section class="bg-gray-100 text-black">
+    <div class="flex justify-center min-h-screen">
+        <div class="w-full max-w-md p-8">
+            <h1 class="text-2xl font-semibold mb-4">Search Trains</h1>
+            <form method="GET" action="{% url 'search_trains' %}" class="mb-4">
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="from">From</label>
+                    <input type="text" id="from" name="from" placeholder="Enter departure station" class="form-input">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="to">To</label>
+                    <input type="text" id="to" name="to" placeholder="Enter destination station" class="form-input">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="seats">Seats</label>
+                    <input type="number" id="seats" name="seats" min="1" placeholder="Enter number of seats" class="form-input">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="adults">Adults</label>
+                    <input type="number" id="adults" name="adults" min="1" placeholder="Enter number of adults" class="form-input">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 font-bold mb-2" for="children">Children</label>
+                    <input type="number" id="children" name="children" min="0" placeholder="Enter number of children" class="form-input">
+                </div>
+                <button type="submit" class="hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #c19b76;">Search</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
