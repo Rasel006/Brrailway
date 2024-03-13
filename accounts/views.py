@@ -66,12 +66,22 @@ class UserLoginView(LoginView):
         messages.success(self.request, "Login successfully")
         return reverse_lazy('home')
     
+from django.contrib import messages
+from django.contrib.auth.views import LogoutView
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+
 class UserLogoutView(LogoutView):
     def get_success_url(self):
         if self.request.user.is_authenticated:
-            logout(self.request)
-        messages.success(self.request, "Logout successfully")
+            messages.success(self.request, "Logout successfully")
         return reverse_lazy('home')
+
+    def dispatch(self, request, *args, **kwargs):
+        response = super().dispatch(request, *args, **kwargs)
+        if self.request.user.is_authenticated:
+            logout(request)
+        return response
 
 class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'accounts/profile.html'
