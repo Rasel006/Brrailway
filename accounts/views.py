@@ -69,11 +69,9 @@ class UserLoginView(LoginView):
 class UserLogoutView(LogoutView):
     def get_success_url(self):
         if self.request.user.is_authenticated:
-            # Redirect authenticated users to the home page
-            return reverse_lazy('home')
-        else:
-            # Redirect unauthenticated users to the login page
-            return reverse_lazy('login')
+            logout(self.request)
+        messages.success(self.request, "Logout successfully")
+        return reverse_lazy('home')
 
 class ProfileView(LoginRequiredMixin, ListView):
     template_name = 'accounts/profile.html'

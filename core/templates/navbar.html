@@ -73,7 +73,11 @@
             <a href="{% url 'profile' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">Profile</a>
           </li>
           <li>
-            <a href="{% url 'logout' %}" class="block mt-4 lg:inline-block lg:mt-0 text-blue-900 hover:text-blue-700-900 hover:font-black mr-4">Logout</a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="hidden lg:block hover:bg-white text-white bg-[#5AE4A8] hover:text-[#5AE4A8] border-[#5AE4A8] border-opacity-100 font-bold py-2 px-4 mt-2 rounded" style="border: 1px solid #5AE4A8;">Logout</button>
+            </form>
+            
           </li>
           {% else %}
           <li>
