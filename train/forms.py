@@ -1,7 +1,6 @@
 from django import forms
 from .models import Train, UserReviews,TrainPurchase
 
-
 class TrainForm(forms.ModelForm):
     class Meta:
         model = Train

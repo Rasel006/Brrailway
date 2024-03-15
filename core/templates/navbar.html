@@ -14,7 +14,7 @@
             </a>
             {% if request.user.is_authenticated %}
                 {% if user.is_superuser %}
-                <a href="{% url 'deposit' %}" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
+                <a href="{% url 'add_train' %}" class="font-medium text-[#5AE4A8] hover:text-blue-700-900 hover:font-black mr-4">
                     Add Train
                 </a>
                 {% endif %}

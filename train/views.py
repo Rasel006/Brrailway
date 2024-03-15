@@ -15,8 +15,6 @@ from django.views.generic.edit import DeleteView,UpdateView
 from transactions.views import send_transaction_email
 
 # Create your views here.
-
-
 class DetailsTrainView(DetailView):
     model = Train
     template_name = 'details_train.html'
